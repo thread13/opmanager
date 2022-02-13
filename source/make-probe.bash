@@ -81,14 +81,18 @@ separator() {
 EOF
 }
 
-{ cat "${INCLUDEME}" ;
+{ ## cat "${INCLUDEME}" ;
+  sed -E -e '/^\s*:\s*[<][<]([\]?)true\s*(([#].*)?|)$/,/^true\s*$/d' \
+  "${INCLUDEME}" ;
+  
 
   ESCAPED=$(echo ${INCLUDEME} | sed 's@/@[/]@g')
   separator
   sed -E -e '1{/^\#\!/d}'                          \
          -e "/^\s*[.]\s+[.][.][/]${ESCAPED}/d"     \
          -e "/^\s*source\s+[.][.][/]${ESCAPED}/d"  \
-         -e '/^\s*probe\s*([#].*)?$/d'             \
+         -e '/^\s*[#]\s*test([s]?)\s*$/d'          \
+         -e '/^\s*probe\s*(([#].*)?|)$/d'          \
   "${PROBEFILE}" ;
 
   separator
