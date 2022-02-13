@@ -1,0 +1,12 @@
+
+ 1. it is extremely frequent for a modern Linux system to have /bin/bash installed, so these monitors are targetting bash instead of more classic Bourne Shell
+ 2. every script here shall declare one probe() function, which in turn shall output the probe result to stdout -- e.g. 0.26 for a 1-minute load average sample .
+ 3. under normal circumstances, the scripts shall not print anything else, and use the debug()/log()/warning()/error() functions to log various messages, which will go to the local syslog system.
+ 4. the scripts _may_ invoke that probe() routine at the end of the script for debugging purposes; this invocation will be replaced in production "monitor" sample code.
+ 5. likewise, the scripts _may_ invoke the "shell library" script as '. ../mylib/include.bash' or 'source ../mylib/include.bash' for testing purposes; 
+    in the "monitor" script, this line will be replaced by the "library" script content.
+ 6. the scripts _shall_ define the following environment variables - what shall happen _after_ sourcing ../mylib/include.bash, if that is the case :
+     - PROBENAME, which shall be the probe tag
+     - PROBEVAR, which shall be the name of the probe
+ 7. the script /may/ define a message() function, which output will be added to the report header.
+
