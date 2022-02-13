@@ -1,7 +1,5 @@
-<tt>
-A collection of probes and alert scripts for ManageEngine OpManager NMS. 
-<p/>
+# opmanager
+OpenManager NMS - related code
 
  * [OpManager](doc/ManageEngine.md) - OpManager documentation links
 
-</tt>
